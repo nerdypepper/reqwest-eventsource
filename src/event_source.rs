@@ -131,22 +131,23 @@ fn check_response(response: Response) -> Result<Response, Error> {
                 response,
             ));
         };
-    if content_type
-        .to_str()
-        .map_err(|_| ())
-        .and_then(|s| s.parse::<mime::Mime>().map_err(|_| ()))
-        .map(|mime_type| {
-            matches!(
-                (mime_type.type_(), mime_type.subtype()),
-                (mime::TEXT, mime::EVENT_STREAM)
-            ) || mime_type == mime::APPLICATION_JAVASCRIPT_UTF_8
-        })
-        .unwrap_or(false)
-    {
-        Ok(response)
-    } else {
-        Err(Error::InvalidContentType(content_type.clone(), response))
-    }
+    Ok(response)
+    // if content_type
+    //     .to_str()
+    //     .map_err(|_| ())
+    //     .and_then(|s| s.parse::<mime::Mime>().map_err(|_| ()))
+    //     .map(|mime_type| {
+    //         matches!(
+    //             (mime_type.type_(), mime_type.subtype()),
+    //             (mime::TEXT, mime::EVENT_STREAM)
+    //         ) || mime_type == mime::APPLICATION_JAVASCRIPT_UTF_8
+    //     })
+    //     .unwrap_or(false)
+    // {
+    //     Ok(response)
+    // } else {
+    //     Err(Error::InvalidContentType(content_type.clone(), response))
+    // }
 }
 
 impl<'a> EventSourceProjection<'a> {
