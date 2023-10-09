@@ -138,7 +138,7 @@ fn check_response(response: Response) -> Result<Response, Error> {
         .map(|mime_type| {
             matches!(
                 (mime_type.type_(), mime_type.subtype()),
-                (mime::TEXT, mime::EVENT_STREAM)
+                (mime::TEXT, mime::EVENT_STREAM) | (mime::JSON, mime::EVENT_STREAM)
             )
         })
         .unwrap_or(false)
